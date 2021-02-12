@@ -7,6 +7,15 @@ class Despesa{
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados(){
+        for(let i in this){
+            if(this[i] == undefined || this[i] == '' || this[i] == null){
+                return false
+            }
+        }
+        return true
+    }
 }
 
 class Bd {
@@ -16,7 +25,7 @@ class Bd {
 
         if (id === null) {
             localStorage.setItem('id', 0)
-        }
+        } 
     }
 
     getProximoId(){
@@ -52,7 +61,13 @@ function cadastrarDespesa(){
        descricao.value, 
        valor.value, 
    )
-   bd.gravar(despesa)
+    if(despesa.validarDados()) {
+        // bd.gravar(despesa)
+        console.log('Dados válidos')
+    }else {
+        //dialog de erro
+        console.log('Dados inválidos')
+    }
 }
 
 
